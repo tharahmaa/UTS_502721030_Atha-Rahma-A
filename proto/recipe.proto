@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package RecipePackage;
+
+service RecipeService {
+  rpc SearchRecipe (Empty) returns (Recipes) {};
+  rpc AddRecipe (AddRecipeRequest) returns (Response) {};
+  rpc UpdateRecipe (RecipeWithID) returns (Response) {};
+  rpc DeleteRecipe (RecipeID) returns (Response) {};
+}
+
+message Recipe {
+  string name = 1;
+  string description = 2;
+  string ingredients = 3;
+  string steps = 4;
+}
+
+message RecipeID {
+  string id = 1;
+}
+
+message Recipes {
+  repeated Recipe recipes = 1;
+}
+
+message RecipeWithID {
+  RecipeID recipeId = 1;
+  Recipe recipe = 2;
+}
+
+message Response {
+  string code = 1;
+  string message = 2;
+  Recipe recipe = 3;
+}
+
+message AddRecipeRequest {
+  Recipe recipe = 1;
+}
+
+message Empty {}
