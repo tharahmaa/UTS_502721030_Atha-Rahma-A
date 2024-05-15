@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resep Masakan</title>
     <link rel="icon" href="icon.png" type="image/x-icon">
+    <!-- Import library grpc-js dan protobuffer -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/@grpc/grpc-js/1.3.1/grpc-js.min.js"
+            integrity="sha512-8DPPdVgMNGvwxwEGvwtb8+j/TpxL8eAZyazVLd4ngEnFz4jnNW2DmHvVXoqq7FNdLhLZg3wkc/f5UZwnGdRVFA=="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/protobufjs/6.10.2/protobuf.js"
+            integrity="sha512-D7oTqcm7hSiTPjXt6oF5T+D6rtK5aDx5OTcGLjqUULFsCw+Ryq0enW95iU4pSGwO0KvcBJyZxlUv8Y74ESZGzA=="
+            crossorigin="anonymous"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -88,7 +95,7 @@
     </header>
     <div class="container">
         <!-- Form untuk pencarian -->
-        <form action="#" method="GET">
+        <form id="searchForm" action="#" method="GET">
             <h2>Cari Resep</h2>
             <div class="form-group">
                 <label for="keyword">Kata Kunci:</label>
@@ -99,7 +106,7 @@
     </div>
     <div class="container">
         <!-- Form untuk menambah resep baru -->
-        <form action="/api/tambah-resep" method="POST">
+        <form id="addRecipeForm" action="/api/tambah-resep" method="POST">
             <h2>Tambah Resep Baru</h2>
             <div class="form-group">
                 <label for="nama-resep">Nama Resep:</label>
@@ -120,5 +127,9 @@
             <input type="submit" value="Tambah Resep">
         </form>
     </div>
+    <script type="module">
+        import { Recipes } from '../proto/RecipePackage/Recipe';
+        const client = new Recipes ('0.0.0.0:5001', grpc.credentials.createInsecure());
+    </script>
 </body>
 </html>
