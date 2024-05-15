@@ -43,6 +43,10 @@ const onClientReady = () => {
     const app = express();
     app.use(authCors);
     app.use(express.json());
+    // Serve static files
+    app.use(express.static(path.join(__dirname, '../../public')));
+
+    
 
     app.get('/recipes', (req: Request, res: Response) => {
         client.SearchRecipe({}, (err: any, _res: any) => {
